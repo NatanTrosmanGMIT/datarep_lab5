@@ -1,3 +1,4 @@
+// Imports
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -10,15 +11,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+// First step
 app.get('/', (req, res) => {
   res.send('Welcome to Data Representation & Querying');
 })
 
+// getting the name typed in the HTML
 app.get('/hello/:name', (req,res)=>{
     console.log(req.params.name);
     res.send('Hello '+req.params.name);
 })
-
+// display that info
 app.get('/api/movies', (req,res)=>{
 const mymovies =[
     {
@@ -34,15 +37,15 @@ const mymovies =[
 ];
     res.json({movies:mymovies});
 })
-
+// goes to html file
 app.get('/test', (req,res)=>{
     res.sendFile(__dirname+ '/index.html');
 })
-
+// display name after submition but shows in the html
 app.get('/name', (req,res)=>{
 res.send('Hello '+req.query.fname + ' ' +req.query.lname)
 })
-
+// display name after submition but doesnt show in the html
 app.post('/name', (req,res)=>{
     res.send('Hello '+req.body.fname + ' ' +req.body.lname)
     })
